@@ -12,6 +12,7 @@ onready var Town = preload("res://Town.tscn")
 onready var Line = preload("res://Line.tscn")
 onready var LineContainer = $LineContainer
 onready var score_label = $Panel/ScoreLabel
+onready var panel = $Panel
 
 func _ready():
 	pass # Replace with function body.
@@ -72,8 +73,9 @@ func draw_solution(s):
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
-		if event.position.y > 500:
+		if event.position.x < 150:
 			return
+		
 		points.append(event.position)
 		var new_town = Town.instance()
 		new_town.position = event.position
@@ -89,7 +91,7 @@ func _on_Button_pressed():
 
 
 func update_score_label(score):
-	score_label.text = "Score: " + str(int(score)) + " Best: " + str(int(best_score))
+	score_label.text = "Score: " + str(int(score)) + "\nBest: " + str(int(best_score))
 
 
 func _on_PrevButton_pressed():

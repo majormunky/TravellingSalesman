@@ -9,46 +9,55 @@ script = ExtResource( 1 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 150.0
+margin_bottom = 600.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonContainer" type="MarginContainer" parent="Panel"]
-margin_left = 34.8467
-margin_top = 523.32
-margin_right = 119.847
-margin_bottom = 567.32
+margin_right = 85.0
+margin_bottom = 81.0
+custom_constants/margin_top = 25
+custom_constants/margin_left = 35
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ButtonContainer"]
-margin_right = 172.0
-margin_bottom = 44.0
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/ButtonContainer"]
+margin_left = 35.0
+margin_top = 25.0
+margin_right = 117.0
+margin_bottom = 111.0
+custom_constants/separation = 13
 
 [node name="RunButton" type="Button" parent="Panel/ButtonContainer/HBoxContainer"]
 margin_right = 82.0
-margin_bottom = 44.0
+margin_bottom = 20.0
 text = "Draw Lines"
 
 [node name="PrevButton" type="Button" parent="Panel/ButtonContainer/HBoxContainer"]
-margin_left = 86.0
-margin_right = 126.0
-margin_bottom = 44.0
+margin_top = 33.0
+margin_right = 82.0
+margin_bottom = 53.0
 text = "Prev"
 
 [node name="NextButton" type="Button" parent="Panel/ButtonContainer/HBoxContainer"]
-margin_left = 130.0
-margin_right = 172.0
-margin_bottom = 44.0
+margin_top = 66.0
+margin_right = 82.0
+margin_bottom = 86.0
 text = "Next"
 
 [node name="ScoreLabel" type="Label" parent="Panel"]
-margin_left = 249.222
-margin_top = 541.304
-margin_right = 300.222
-margin_bottom = 555.304
+margin_left = 22.4846
+margin_top = 170.891
+margin_right = 73.4846
+margin_bottom = 184.891
 text = "Score: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LineContainer" type="Node2D" parent="."]
 [connection signal="pressed" from="Panel/ButtonContainer/HBoxContainer/RunButton" to="." method="_on_Button_pressed"]
