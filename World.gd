@@ -1,5 +1,6 @@
 extends Node2D
 
+const MAX_POINTS = 10
 var points = []
 var solutions = []
 var best_solution = null
@@ -15,6 +16,7 @@ onready var score_label = $Panel/VBoxContainer/ScoreLabel
 onready var solutions_label = $Panel/VBoxContainer/SolutionsLabel
 onready var panel = $Panel
 onready var point_container = $PointContainer
+onready var time_label = $Panel/VBoxContainer/TimeLabel
 
 func _ready():
 	pass # Replace with function body.
@@ -69,8 +71,6 @@ func draw_solution(s):
 		new_line.add_point(a_point)
 	new_line.add_point(s[0])
 	line_container.add_child(new_line)
-	
-	
 
 
 func _input(event):
@@ -78,7 +78,7 @@ func _input(event):
 		if event.position.x < 150:
 			return
 		
-		if len(points) >= 9:
+		if len(points) >= MAX_POINTS:
 			return
 		
 		points.append(event.position)
@@ -91,10 +91,16 @@ func _on_Button_pressed():
 	if len(points) <= 2:
 		return
 	
+	var start = OS.get_system_time_msecs()
+	
 	generate_solutions(points, len(points) - 1)
 	draw_solution(best_solution)
 	update_score_label(best_score)
 	solutions_label.text = "Solutions: " + str(len(debug_solutions))
+	
+	var end = OS.get_system_time_msecs()
+	var diff = end - start
+	time_label.text = "Time: " + str(diff / 1000.0)
 
 
 func update_score_label(score):
@@ -146,3 +152,4 @@ func _on_ResetButton_pressed():
 
 	update_score_label(0)
 	solutions_label.text = "Solutions: 0"
+	time_label.text = "Time: 0"

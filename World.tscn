@@ -80,6 +80,12 @@ margin_right = 75.0
 margin_bottom = 49.0
 text = "Solutions: 0"
 
+[node name="TimeLabel" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 53.0
+margin_right = 75.0
+margin_bottom = 67.0
+text = "Time: 0"
+
 [node name="LineContainer" type="Node2D" parent="."]
 
 [node name="PointContainer" type="Node2D" parent="."]
