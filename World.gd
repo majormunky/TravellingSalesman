@@ -10,10 +10,11 @@ var debug_index = 0
 
 onready var Town = preload("res://Town.tscn")
 onready var Line = preload("res://Line.tscn")
-onready var LineContainer = $LineContainer
+onready var line_container = $LineContainer
 onready var score_label = $Panel/VBoxContainer/ScoreLabel
 onready var solutions_label = $Panel/VBoxContainer/SolutionsLabel
 onready var panel = $Panel
+onready var point_container = $PointContainer
 
 func _ready():
 	pass # Replace with function body.
@@ -60,14 +61,14 @@ func evaluate_solution():
 	
 
 func draw_solution(s):
-	for child in LineContainer.get_children():
-		LineContainer.remove_child(child)
+	for child in line_container.get_children():
+		line_container.remove_child(child)
 
 	var new_line = Line.instance()
 	for a_point in s:
 		new_line.add_point(a_point)
 	new_line.add_point(s[0])
-	LineContainer.add_child(new_line)
+	line_container.add_child(new_line)
 	
 	
 
@@ -77,15 +78,19 @@ func _input(event):
 		if event.position.x < 150:
 			return
 		
+		if len(points) >= 9:
+			return
+		
 		points.append(event.position)
 		var new_town = Town.instance()
 		new_town.position = event.position
-		add_child(new_town)
+		point_container.add_child(new_town)
 
 
 func _on_Button_pressed():
 	if len(points) <= 2:
 		return
+	
 	generate_solutions(points, len(points) - 1)
 	draw_solution(best_solution)
 	update_score_label(best_score)
@@ -93,8 +98,10 @@ func _on_Button_pressed():
 
 
 func update_score_label(score):
-	score_label.text = "Score: " + str(int(score)) + "\nBest: " + str(int(best_score))
-
+	if score == 0:
+		score_label.text = "Score: 0\nBest: 0"
+	else:
+		score_label.text = "Score: " + str(int(score)) + "\nBest: " + str(int(best_score))
 
 func _on_PrevButton_pressed():
 	var score_keys = debug_solutions.keys()
@@ -120,3 +127,22 @@ func _on_NextButton_pressed():
 	var selected_key = score_keys[debug_index]
 	draw_solution(debug_solutions[selected_key])
 	update_score_label(selected_key)
+
+
+func _on_ResetButton_pressed():
+	points = []
+	solutions = []
+	best_solution = null
+	best_score = 1000000000
+
+	debug_solutions = {}
+	debug_index = 0
+	
+	for child in point_container.get_children():
+		point_container.remove_child(child)
+	
+	for child in line_container.get_children():
+		line_container.remove_child(child)
+
+	update_score_label(0)
+	solutions_label.text = "Solutions: 0"

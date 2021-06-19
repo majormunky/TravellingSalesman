@@ -29,7 +29,7 @@ __meta__ = {
 margin_left = 35.0
 margin_top = 25.0
 margin_right = 117.0
-margin_bottom = 111.0
+margin_bottom = 144.0
 custom_constants/separation = 13
 
 [node name="RunButton" type="Button" parent="Panel/ButtonContainer/VBoxContainer"]
@@ -49,31 +49,41 @@ margin_right = 82.0
 margin_bottom = 86.0
 text = "Next"
 
+[node name="ResetButton" type="Button" parent="Panel/ButtonContainer/VBoxContainer"]
+margin_top = 99.0
+margin_right = 82.0
+margin_bottom = 119.0
+text = "Reset"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-margin_left = 22.653
-margin_top = 140.637
-margin_right = 77.653
-margin_bottom = 180.637
-custom_constants/separation = 8
+margin_left = 31.1479
+margin_top = 211.428
+margin_right = 106.148
+margin_bottom = 251.428
+custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreLabel" type="Label" parent="Panel/VBoxContainer"]
 margin_right = 75.0
-margin_bottom = 14.0
-text = "Score: 0"
+margin_bottom = 31.0
+text = "Score: 0
+Best: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SolutionsLabel" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 22.0
+margin_top = 35.0
 margin_right = 75.0
-margin_bottom = 36.0
+margin_bottom = 49.0
 text = "Solutions: 0"
 
 [node name="LineContainer" type="Node2D" parent="."]
+
+[node name="PointContainer" type="Node2D" parent="."]
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/RunButton" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/PrevButton" to="." method="_on_PrevButton_pressed"]
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/ResetButton" to="." method="_on_ResetButton_pressed"]
