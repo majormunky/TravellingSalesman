@@ -105,6 +105,10 @@ func _on_Button_pressed():
 	update_score_label(best_score)
 	solutions_label.text = "Solutions: " + str(len(debug_solutions))
 	
+	$Panel/ButtonContainer/VBoxContainer/NextButton.disabled = false
+	$Panel/ButtonContainer/VBoxContainer/PrevButton.disabled = false
+	$Panel/ButtonContainer/VBoxContainer/RunButton.disabled = true
+	
 	var end = OS.get_system_time_msecs()
 	var diff = end - start
 	time_label.text = "Time: " + str(diff / 1000.0)
@@ -161,3 +165,7 @@ func _on_ResetButton_pressed():
 	solutions_label.text = "Solutions: 0"
 	time_label.text = "Time: 0"
 	state = "started"
+	
+	$Panel/ButtonContainer/VBoxContainer/NextButton.disabled = true
+	$Panel/ButtonContainer/VBoxContainer/PrevButton.disabled = true
+	$Panel/ButtonContainer/VBoxContainer/RunButton.disabled = false

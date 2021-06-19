@@ -41,12 +41,14 @@ text = "Draw Lines"
 margin_top = 33.0
 margin_right = 82.0
 margin_bottom = 53.0
+disabled = true
 text = "Prev"
 
 [node name="NextButton" type="Button" parent="Panel/ButtonContainer/VBoxContainer"]
 margin_top = 66.0
 margin_right = 82.0
 margin_bottom = 86.0
+disabled = true
 text = "Next"
 
 [node name="ResetButton" type="Button" parent="Panel/ButtonContainer/VBoxContainer"]
