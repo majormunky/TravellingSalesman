@@ -89,6 +89,7 @@ text = "Time: 0"
 [node name="LineContainer" type="Node2D" parent="."]
 
 [node name="PointContainer" type="Node2D" parent="."]
+
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/RunButton" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/PrevButton" to="." method="_on_PrevButton_pressed"]
 [connection signal="pressed" from="Panel/ButtonContainer/VBoxContainer/NextButton" to="." method="_on_NextButton_pressed"]

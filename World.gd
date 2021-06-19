@@ -1,11 +1,11 @@
 extends Node2D
 
-const MAX_POINTS = 10
+const MAX_POINTS = 11
 var points = []
 var solutions = []
 var best_solution = null
 var best_score = 1000000000
-
+var state = "started"
 var debug_solutions = {}
 var debug_index = 0
 
@@ -23,6 +23,7 @@ func _ready():
 
 
 func generate_solutions(point_list, item_count):
+	state = "have_solution"
 	if item_count == 1:
 		evaluate_solution()
 	else:
@@ -74,6 +75,9 @@ func draw_solution(s):
 
 
 func _input(event):
+	if state == "have_solution":
+		return
+
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.position.x < 150:
 			return
@@ -89,6 +93,9 @@ func _input(event):
 
 func _on_Button_pressed():
 	if len(points) <= 2:
+		return
+	
+	if state == "have_solution":
 		return
 	
 	var start = OS.get_system_time_msecs()
@@ -153,3 +160,4 @@ func _on_ResetButton_pressed():
 	update_score_label(0)
 	solutions_label.text = "Solutions: 0"
 	time_label.text = "Time: 0"
+	state = "started"
