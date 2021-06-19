@@ -5,13 +5,14 @@ var solutions = []
 var best_solution = null
 var best_score = 1000000000
 
-var debug_solutions = []
+var debug_solutions = {}
 var debug_index = 0
 
 onready var Town = preload("res://Town.tscn")
 onready var Line = preload("res://Line.tscn")
 onready var LineContainer = $LineContainer
-onready var score_label = $Panel/ScoreLabel
+onready var score_label = $Panel/VBoxContainer/ScoreLabel
+onready var solutions_label = $Panel/VBoxContainer/SolutionsLabel
 onready var panel = $Panel
 
 func _ready():
@@ -47,7 +48,7 @@ func evaluate_solution():
 	
 	score += points[0].distance_to(points[-1])
 	
-	debug_solutions.append([score, points.duplicate()])
+	debug_solutions[score] = points.duplicate()
 	
 	if score < best_score:
 		# print("Found lower score! -> (old=", best_score, "), (new=", score, ")")
@@ -88,6 +89,7 @@ func _on_Button_pressed():
 	generate_solutions(points, len(points) - 1)
 	draw_solution(best_solution)
 	update_score_label(best_score)
+	solutions_label.text = "Solutions: " + str(len(debug_solutions))
 
 
 func update_score_label(score):
@@ -95,12 +97,26 @@ func update_score_label(score):
 
 
 func _on_PrevButton_pressed():
-	pass # Replace with function body.
+	var score_keys = debug_solutions.keys()
+	score_keys.sort()
+	debug_index -= 1
+	
+	if debug_index < 0:
+		debug_index = len(score_keys) - 1
+	var selected_key = score_keys[debug_index]
+	draw_solution(debug_solutions[selected_key])
+	update_score_label(selected_key)
 
 
 func _on_NextButton_pressed():
 	# print(debug_solutions)
-	debug_index += 1
-	draw_solution(debug_solutions[debug_index][1])
-	update_score_label(debug_solutions[debug_index][0])
-	# print("Drawing next solution")
+	var score_keys = debug_solutions.keys()
+	score_keys.sort()
+	debug_index += 1	
+	
+	if debug_index >= len(score_keys):
+		debug_index = 0
+
+	var selected_key = score_keys[debug_index]
+	draw_solution(debug_solutions[selected_key])
+	update_score_label(selected_key)
