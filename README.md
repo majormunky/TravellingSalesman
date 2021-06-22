@@ -7,5 +7,6 @@ So far I just have the basic travelling salesman working.
 
 TODO:
  - Figure out ant colony optimization using the same town map
- - Figure out ant colony
+ - Figure out ant colony with mockup of ant tunnels
+ - Look into using this for creating paths that npcs walk on
  - Figure out slime mold algorithms
