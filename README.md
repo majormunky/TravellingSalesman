@@ -10,4 +10,5 @@ TODO:
  - Figure out ant colony with mockup of ant tunnels
  - Look into using this for creating paths that npcs walk on
  - Figure out slime mold algorithms
+ - Setting up animations?
  - Animations with ants leaving paths where they walk
